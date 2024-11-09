@@ -25,13 +25,13 @@ while True:
         if playerScore >= 21 or computerScore >= 21 or userChoice == "n":
             os.system('cls')
             #1
-            if playerScore == 21 or computerScore == 21 and playerScore < 22 and playerScore < 22:
+            if  playerScore == 21 or computerScore == 21 and playerScore < 22 and computerScore < 22:
                 outputResult(playerCards, computerCards, playerScore, computerScore, 1)
             #2
             if playerScore > 21 or computerScore > 21:
                 outputResult(playerCards, computerCards, playerScore, computerScore, 2)
             #3
-            else:
+            if playerScore < 21 and computerScore < 21:
                 outputResult(playerCards, computerCards, playerScore, computerScore, 3)
             userInput = yesNo(1)
             userChoice = ""
