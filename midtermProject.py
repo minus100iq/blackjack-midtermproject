@@ -46,9 +46,8 @@ def blackjack():
     while True:
         user_cards = [deal_card(), deal_card()]
         dealer_cards = [deal_card(), deal_card()]
-        game_over = False
 
-        while not game_over: #game_over is True
+        while True:
             user_score = calculate_score(user_cards)
             dealer_score = calculate_score(dealer_cards)
 
@@ -57,13 +56,13 @@ def blackjack():
             print(f"Dealer's first card: {format_hand(dealer_cards)[0]}")
 
             if user_score == 0 or dealer_score == 0 or user_score > 21:
-                game_over = True
+                break
             else:
                 should_continue = input("Type 'y' to get another card, 'n' to stop: ")
                 if should_continue == 'y':
                     user_cards.append(deal_card())
                 else:
-                    game_over = True
+                    break
 
         while dealer_score != 0 and dealer_score < 17:
             dealer_cards.append(deal_card())
