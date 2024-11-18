@@ -1,5 +1,4 @@
 import random
-import os
 
 def deal_card():
     cards = {
@@ -10,7 +9,7 @@ def deal_card():
 
 #Calculates the total score of a hand (user or dealer).
 def calculate_score(cards):
-    values = [value for _, value in cards] #values =
+    values = [value for _, value in cards] #values = [2,3,4,5...]
     if sum(values) == 21 and len(cards) == 2:
         return 0
     if 11 in values and sum(values) > 22:
@@ -65,7 +64,7 @@ def blackjack():
                 else:
                     break
 
-        while dealer_score != 0 and dealer_score < 17:
+        while dealer_score < 17:
             dealer_cards.append(deal_card())
             dealer_score = calculate_score(dealer_cards)
 
