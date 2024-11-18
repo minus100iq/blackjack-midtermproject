@@ -1,4 +1,5 @@
 import random
+import os
 
 def deal_card():
     cards = {
@@ -76,6 +77,7 @@ def blackjack():
 
         play_again = input("Do you want to play again? (y/n): ")
         if play_again != 'y':
+            print("Thank you for your time. See you later")
             break
 
 blackjack()
