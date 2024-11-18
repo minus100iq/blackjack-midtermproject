@@ -68,9 +68,9 @@ def blackjack():
             dealer_cards.append(deal_card())
             dealer_score = calculate_score(dealer_cards)
 
-        print(f"Your final hand: {', '.join(format_hand(user_cards))}")
+        print(f"Your final card: {', '.join(format_hand(user_cards))}")
         print(f"Your score: {user_score}")
-        print(f"Dealer's final hand: {', '.join(format_hand(dealer_cards))}")
+        print(f"Dealer's final card: {', '.join(format_hand(dealer_cards))}")
         print(f"Dealer's score: {dealer_score}")
         print(compare_scores(user_score, dealer_score))
 
