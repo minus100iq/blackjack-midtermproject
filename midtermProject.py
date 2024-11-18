@@ -9,27 +9,25 @@ def deal_card():
 
 #Calculates the total score of a hand (user or dealer).
 def calculate_score(cards):
-    values = [value for _, value in cards] #values = [2,3,4,5,...]
+    values = [value for _, value in cards] #values =
     if sum(values) == 21 and len(cards) == 2:
         return 0
-    if 11 in values and sum(values) > 21:
+    if 11 in values and sum(values) > 22:
         values.remove(11)
         values.append(1)
     return sum(values)
 
 #For compare score between user and computer
-def compare_scores(user_score, computer_score):
-    if user_score == computer_score:
+def compare_scores(user_score, dealer_score):
+    if user_score == dealer_score:
         return "It's a draw!"
-    elif computer_score == 0:
-        return "Dealer has blackjack. You lose!"
-    elif user_score == 0:
-        return "You have blackjack. You win!"
+    elif (user_score > 21 and dealer_score > 21) and (user_score == dealer_score):
+        return  "It is Bust!"
     elif user_score > 21:
         return "Bust! You lose."
-    elif computer_score > 21:
+    elif dealer_score > 21:
         return "Dealer went over 21. You win!"
-    elif user_score > computer_score:
+    elif user_score > dealer_score:
         return "You win!"
     else:
         return "You lose!"
@@ -47,18 +45,18 @@ def blackjack():
 
     while True:
         user_cards = [deal_card(), deal_card()]
-        computer_cards = [deal_card(), deal_card()]
+        dealer_cards = [deal_card(), deal_card()]
         game_over = False
 
         while not game_over: #game_over is True
             user_score = calculate_score(user_cards)
-            computer_score = calculate_score(computer_cards)
+            dealer_score = calculate_score(dealer_cards)
 
             print(f"Your cards: {', '.join(format_hand(user_cards))}")
             print(f"Your score: {user_score}")
-            print(f"Dealer's first card: {format_hand(computer_cards)[0]}")
+            print(f"Dealer's first card: {format_hand(dealer_cards)[0]}")
 
-            if user_score == 0 or computer_score == 0 or user_score > 21:
+            if user_score == 0 or dealer_score == 0 or user_score > 21:
                 game_over = True
             else:
                 should_continue = input("Type 'y' to get another card, 'n' to stop: ")
@@ -67,15 +65,15 @@ def blackjack():
                 else:
                     game_over = True
 
-        while computer_score != 0 and computer_score < 17:
-            computer_cards.append(deal_card())
-            computer_score = calculate_score(computer_cards)
+        while dealer_score != 0 and dealer_score < 17:
+            dealer_cards.append(deal_card())
+            dealer_score = calculate_score(dealer_cards)
 
         print(f"Your final hand: {', '.join(format_hand(user_cards))}")
         print(f"Your score: {user_score}")
-        print(f"Dealer's final hand: {', '.join(format_hand(computer_cards))}")
-        print(f"Dealer's score: {computer_score}")
-        print(compare_scores(user_score, computer_score))
+        print(f"Dealer's final hand: {', '.join(format_hand(dealer_cards))}")
+        print(f"Dealer's score: {dealer_score}")
+        print(compare_scores(user_score, dealer_score))
 
         play_again = input("Do you want to play again? (y/n): ")
         if play_again != 'y':
